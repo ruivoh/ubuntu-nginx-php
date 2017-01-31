@@ -33,6 +33,8 @@ COPY config/php/www.conf /etc/php/7.0/fpm/pool.d/www.conf
 # Configure Supervisor
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+RUN journalctl --vacuum-time=2d && journalctl --vacuum-size=500M
+
 RUN mkdir -p /var/www/src
 WORKDIR /var/www/src
 COPY src/ /var/www/src/
